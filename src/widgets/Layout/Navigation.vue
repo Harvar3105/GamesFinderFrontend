@@ -1,13 +1,23 @@
 ﻿<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 
+const { locale } = useI18n()
+
+const changeLanguage = (lang: string) => {
+  locale.value = lang
+}
 </script>
 
 <template>
   <nav class="navbar">
     <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/about">About</router-link></li>
+      <li><router-link to="/">{{ $t("Home") }}</router-link></li>
+      <li><router-link to="/about">{{ $t("About") }}</router-link></li>
     </ul>
+    <div>
+      <button @click="changeLanguage('en')">English</button>
+      <button @click="changeLanguage('ru')">Русский</button>
+    </div>
   </nav>
 </template>
 
