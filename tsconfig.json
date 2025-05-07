@@ -15,7 +15,7 @@
     "baseUrl": ".",
     "types": ["vue", "vue-i18n"],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
     }
   },
   "include": [
