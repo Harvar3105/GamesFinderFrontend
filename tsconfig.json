@@ -13,6 +13,7 @@
     "checkJs": false,
     "isolatedModules": true,
     "baseUrl": ".",
+    "types": ["vue", "vue-i18n"],
     "paths": {
       "@/*": ["src/*"]
     }

@@ -6,7 +6,7 @@ import Footer from "@/views/widgets/layout/Footer.vue";
 
 
 <template>
-  <div id="app" class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen dark:bg-blue-900 dark:text-white">
     <!-- ХЕДЕР -->
     <header class="flex justify-evenly">
       <Navigation />

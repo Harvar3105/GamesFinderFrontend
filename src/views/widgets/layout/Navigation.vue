@@ -1,8 +1,9 @@
 ﻿<script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import LanguageSwitcher from '@/views/widgets/language/LanguageSwitcher.vue'
+import ThemeSwitcher from "@/views/widgets/theme/ThemeSwitcher.vue";
 
-const { locale } = useI18n()
+const { locale } = useI18n();
 
 const changeLanguage = (lang: string) => {
   locale.value = lang
@@ -17,6 +18,9 @@ const changeLanguage = (lang: string) => {
     </ul>
     <div>
       <LanguageSwitcher/>
+    </div>
+    <div>
+      <ThemeSwitcher/>
     </div>
   </nav>
 </template>
