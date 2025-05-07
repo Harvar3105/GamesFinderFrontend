@@ -1,19 +1,30 @@
-﻿{
+﻿//{
+//  "extends": "./tsconfig.json",
+//  "compilerOptions": {
+//    "baseUrl": ".",
+//    "outDir": "dist-server",
+//    "paths": {
+//      "@/shared/*": ["shared/*"]
+//    },
+//    "target": "esnext",
+//    "module": "esnext",
+//    "moduleResolution": "node",
+//    "allowJs": false,
+//    "resolveJsonModule": true,
+//    "esModuleInterop": true,
+//    "types": ["node"]
+//  },
+//  "include": ["server/**/*", "shared/**/*"],
+//  "exclude": ["node_modules", "src"]
+//}
+
+{
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "dist-server",
-    "paths": {
-      "@/shared/*": ["shared/*"]
-    },
-    "module": "ESNext",
-    "target": "ESNext",
-    "moduleResolution": "node",
-    "allowJs": false,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "types": ["node"]
-  },
-  "include": ["server/**/*", "shared/**/*"],
-  "exclude": ["node_modules", "src"]
+    "module": "commonjs",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "declaration": true
+  }
 }

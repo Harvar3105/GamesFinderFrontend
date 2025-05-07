@@ -1,13 +1,13 @@
 ﻿import {AxiosController, AxiosControllerOptions} from "./AxiosController";
 import {IUserPayload, User} from "../shared/entities/User";
 
-export default class UserAuth extends AxiosController{
+export default class UserAuthController extends AxiosController{
 
-    constructor(config?: AxiosControllerOptions) {
+    constructor(config: AxiosControllerOptions) {
         super(config);
     }
 
-    public async register(user: IUserPayload): Promise<IUserPayload> {
+    public async register(user: IUserPayload): Promise<IUserPayload | null> {
         try {
             const response = await this.post<IUserPayload>('api/Auth/register', user);
             if (response.status !== 200){
@@ -21,7 +21,7 @@ export default class UserAuth extends AxiosController{
         }
     }
 
-    public async login(userdata: IUserPayload): Promise<IUserPayload> {
+    public async login(userdata: IUserPayload): Promise<IUserPayload | null> {
         if (userdata.password === undefined && userdata.jwt === undefined) {
             return null;
         }

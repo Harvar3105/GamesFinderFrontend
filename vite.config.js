@@ -20,9 +20,6 @@ export default defineConfig(({mode}) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-    esbuild: {
-      tsconfigRaw: './tsconfig.json',
-    },
     server: {
       port: parseInt(env.VITE_PORT),
       // host: env.VITE_HOST_NAME,

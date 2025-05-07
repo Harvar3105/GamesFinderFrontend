@@ -12,8 +12,10 @@
     "allowJs": true,
     "checkJs": false,
     "isolatedModules": true,
+    "outDir": "./dist",
+    "rootDir": "./",
     "baseUrl": ".",
-    "types": ["vue", "vue-i18n"],
+    "types": ["node","vue", "vue-i18n"],
     "paths": {
       "@/*": ["src/*"],
     }
@@ -22,7 +24,8 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "server"
   ],
   "exclude": [
     "node_modules"
