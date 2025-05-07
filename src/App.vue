@@ -1,6 +1,6 @@
 <script setup>
-import Navigation from "@/widgets/layout/Navigation.vue";
-import Footer from "@/widgets/layout/Footer.vue";
+import Navigation from "@/views/widgets/layout/Navigation.vue";
+import Footer from "@/views/widgets/layout/Footer.vue";
 </script>
 
 
