@@ -6,9 +6,12 @@ import Footer from "@/views/widgets/layout/Footer.vue";
 
 
 <template>
-  <div class="flex flex-col min-h-screen dark:bg-blue-900 dark:text-white">
+  <div class="flex flex-col min-h-screen
+    dark:bg-[#1a1a1e] dark:text-[#efeff0]">
     <!-- ХЕДЕР -->
-    <header class="flex justify-evenly">
+    <header
+        style="transition: top 0.8s; top: 0px;"
+        class="sticky top-0">
       <Navigation />
     </header>
 

@@ -3,31 +3,31 @@
     <button
       type="button"
       @click="toggleDropdown"
-      class="inline-flex justify-center items-center w-10 h-10 rounded-full border border-gray-300 bg-white shadow-sm hover:bg-gray-50"
+      class="inline-flex justify-center items-center w-10 h-10 rounded-full bg-amber-300 dark:bg-[#33353b] shadow-sm hover:bg-gray-50"
     >
-      <span v-if="currentLang === 'en'">🇬🇧</span>
-      <span v-else-if="currentLang === 'ru'">🇷🇺</span>
+      <span v-if="currentLang === 'en'">EN</span>
+      <span v-else-if="currentLang === 'ru'">RU</span>
     </button>
 
     <!-- Dropdown -->
     <div
       v-if="open"
-      class="absolute right-0 mt-2 w-28 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50"
+      class="absolute right-0 mt-2 w-28 origin-top-right rounded-md bg-amber-200 dark:bg-[#33353b] shadow-lg z-50"
     >
       <div class="py-1">
         <button
           type="button"
           @click="changeLanguage('en')"
-          class="flex items-center w-full px-4 py-2 text-sm hover:bg-gray-100"
+          class="flex items-center w-full px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-[#43454d]"
         >
-          🇬🇧 English
+          EN English
         </button>
         <button
           type="button"
           @click="changeLanguage('ru')"
-          class="flex items-center w-full px-4 py-2 text-sm hover:bg-gray-100"
+          class="flex items-center w-full px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-[#43454d]"
         >
-          🇷🇺 Русский
+          RU Русский
         </button>
       </div>
     </div>
