@@ -18,11 +18,11 @@ export default defineConfig(({mode}) => {
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@shared': fileURLToPath(new URL('../shared/src', import.meta.url)),
       },
     },
     server: {
       port: parseInt(env.VITE_PORT),
-      // host: env.VITE_HOST_NAME,
   }
   }
 })

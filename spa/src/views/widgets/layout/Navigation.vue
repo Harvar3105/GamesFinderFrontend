@@ -1,7 +1,7 @@
 ﻿<script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import LanguageSwitcher from '@/views/widgets/language/LanguageSwitcher.vue'
-import ThemeSwitcher from "@/views/widgets/theme/ThemeSwitcher.vue";
+import LanguageSwitcher from '../language/LanguageSwitcher.vue'
+import ThemeSwitcher from "../theme/ThemeSwitcher.vue";
 
 const { locale } = useI18n();
 

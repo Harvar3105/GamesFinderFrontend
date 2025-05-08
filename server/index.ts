@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import userAuthInstance from "./server/ControllersInit.ts";
+import userAuthInstance from "./src/ControllersInit.ts";
 
 const __moduleName = fileURLToPath(new URL(import.meta.url));
 const __dirName = dirname(__moduleName);

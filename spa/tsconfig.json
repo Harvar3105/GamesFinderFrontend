@@ -1,0 +1,50 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "jsx": "preserve",
+    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["../shared/src/*"]
+    }
+  },
+  "include": ["src", "../shared/src"]
+}
+
+
+
+
+//{
+//  "compilerOptions": {
+//    "target": "esnext",
+//    "module": "esnext",
+//    "moduleResolution": "node",
+//    "strict": true,
+//    "jsx": "preserve",
+//    "esModuleInterop": true,
+//    "resolveJsonModule": true,
+//    "skipLibCheck": true,
+//    "forceConsistentCasingInFileNames": true,
+//    "allowJs": true,
+//    "checkJs": false,
+//    "isolatedModules": true,
+//    "outDir": "./dist",
+//    "rootDir": "./src",
+//    "baseUrl": "..",
+//    "types": ["node","vue", "vue-i18n"],
+//    "paths": {
+//      "@/*": ["src/*"]
+//    }
+//  },
+//  "include": [
+//    "spa/src/**/*.ts",
+//    "spa/src/**/*.d.ts",
+//    "spa/src/**/*.tsx",
+//    "spa/src/**/*.vue",
+//    "../shared/**/*"
+//  ],
+//  "exclude": [
+//    "../node_modules"
+//  ]
+//}

@@ -1,5 +1,5 @@
 ﻿import { defineStore } from 'pinia'
-import {IUser, IUserPayload, User} from '../../shared/entities/User'
+import {IUser, IUserPayload, User} from "@shared/entities/User.ts";
 
 export const useUserStore = defineStore('user', {
     state: () => ({
