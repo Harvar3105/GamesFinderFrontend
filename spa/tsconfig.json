@@ -3,48 +3,17 @@
   "compilerOptions": {
     "module": "ESNext",
     "jsx": "preserve",
+    "jsxImportSource": "vue",
     "moduleResolution": "Node",
+    "isolatedModules": true,
+    "strict": true,
     "baseUrl": ".",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "paths": {
-      "@shared/*": ["../shared/src/*"]
+      "@/*": ["src/*"],
+      "@shared/*": ["../shared/dist/types/*"]
     }
   },
-  "include": ["src", "../shared/src"]
+  "include": ["src"]
 }
-
-
-
-
-//{
-//  "compilerOptions": {
-//    "target": "esnext",
-//    "module": "esnext",
-//    "moduleResolution": "node",
-//    "strict": true,
-//    "jsx": "preserve",
-//    "esModuleInterop": true,
-//    "resolveJsonModule": true,
-//    "skipLibCheck": true,
-//    "forceConsistentCasingInFileNames": true,
-//    "allowJs": true,
-//    "checkJs": false,
-//    "isolatedModules": true,
-//    "outDir": "./dist",
-//    "rootDir": "./src",
-//    "baseUrl": "..",
-//    "types": ["node","vue", "vue-i18n"],
-//    "paths": {
-//      "@/*": ["src/*"]
-//    }
-//  },
-//  "include": [
-//    "spa/src/**/*.ts",
-//    "spa/src/**/*.d.ts",
-//    "spa/src/**/*.tsx",
-//    "spa/src/**/*.vue",
-//    "../shared/**/*"
-//  ],
-//  "exclude": [
-//    "../node_modules"
-//  ]
-//}

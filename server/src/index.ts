@@ -3,22 +3,20 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import userAuthInstance from "./src/ControllersInit.ts";
+import userAuthInstance from "./ControllersInit.js";
 
-const __moduleName = fileURLToPath(new URL(import.meta.url));
-const __dirName = dirname(__moduleName);
-const authUrl = process.env.AUTH_SERVER_URL;
-
+const __moduleName = fileURLToPath(import.meta.url);
+const __dirName = dirname(__moduleName).replace('server', 'spa'); // TODO: fix hardcode
 
 const app = express();
 const port = process.env.SERVER_PORT || 8080;
 app.use(cors());
 app.use(bodyParser.json())
-app.use(express.static(join(__dirName, 'dist')));
+app.use(express.static(join(__dirName)));
 
 // Get Vue SPA
 app.get('/', (req, res) => {
-    res.sendFile(join(__dirName, 'dist', 'index.html'));
+    res.sendFile(join(__dirName, 'index.html'));
 });
 
 // Request login
@@ -37,7 +35,7 @@ app.post('/api/login', async (req, res) => {
         });
 
         return res.status(200).json(response);
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error auth:', error.message)
 
         const status = error.response?.status || 500
@@ -61,7 +59,7 @@ app.post('/api/login', async (req, res) => {
         });
 
         return res.status(200).json(response)
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error auth:', error.message)
 
         const status = error.response?.status || 500

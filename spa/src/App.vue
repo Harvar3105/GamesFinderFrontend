@@ -1,6 +1,6 @@
-<script setup>
-import Navigation from "spa/src/views/widgets/layout/Navigation.vue";
-import Footer from "spa/src/views/widgets/layout/Footer.vue";
+<script setup lang="ts">
+import Navigation from "@/views/widgets/layout/Navigation.vue";
+import Footer from "@/views/widgets/layout/Footer.vue";
 </script>
 
 

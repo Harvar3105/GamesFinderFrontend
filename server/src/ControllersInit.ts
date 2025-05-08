@@ -1,5 +1,4 @@
-﻿// services/UserAuthSingleton.ts
-import UserAuth from './Controllers/UserAuthController';
+﻿import UserAuth from './Controllers/UserAuthController.js';
 
 const userAuthInstance = new UserAuth({
     //@ts-ignore

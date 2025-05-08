@@ -1,5 +1,5 @@
-﻿import {AxiosController, AxiosControllerOptions} from "./AxiosController";
-import {IUserPayload, User} from "../shared/entities/User";
+﻿import {AxiosController, AxiosControllerOptions} from "./AxiosController.js";
+import {IUserPayload, User} from "@shared/entities/User.js";
 
 export default class UserAuthController extends AxiosController{
 
