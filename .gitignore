@@ -48,3 +48,6 @@ coverage/
 
 # IDE-specific настройки
 /.vscode/
+/server/dist/
+/shared/dist/
+/spa/dist/
