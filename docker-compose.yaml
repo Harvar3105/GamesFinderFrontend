@@ -1,0 +1,28 @@
+﻿version: '3.8'
+
+services:
+  frontend:
+    build: .
+    container_name: front_end
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./spa/dist:/app/spa/dist:ro
+      - ./shared/dist:/app/shared/dist:ro
+      - ./server/dist:/app/server/dist:ro
+#      - ./:/app
+    environment:
+      - NODE_ENV=production
+      - SERVER_PORT=${SERVER_PORT}
+      - AUTH_SERVER_URL=${AUTH_SERVER_URL}
+      - VITE_NODE_SERVER_URL=${VITE_NODE_SERVER_URL}
+      - VITE_NODE_SERVER_REGISTER_PATH=${VITE_NODE_SERVER_REGISTER_PATH}
+    networks:
+      - shared-network
+    env_file:
+      - .env
+
+networks:
+  shared-network:
+    name: shared-network
+    external: true
