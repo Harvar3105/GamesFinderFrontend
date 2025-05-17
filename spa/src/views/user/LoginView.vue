@@ -28,23 +28,25 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import router from "@/router.ts";
+import {useUserStore} from "@/store/UserStore.ts";
 
 const email = ref('');
 const password = ref('');
 
+const userStore = useUserStore();
+
 const handleSubmit = async (e: Event) => {
   e.preventDefault();
-
 
   try {
     const response = await axios.post(import.meta.env.VITE_NODE_SERVER_URL + import.meta.env.VITE_NODE_SERVER_LOGIN_PATH, {
       password: password.value,
       email: email.value,
     })
-
-    console.log(response);
-
     alert(`Registration successful! ${import.meta.env.VITE_NODE_SERVER_URL + import.meta.env.VITE_NODE_SERVER_LOGIN_PATH}`);
+
+    console.log(response.data);
+    userStore.setUser(response.data);
   } catch (error) {
     console.error(error);
     alert('Registration failed.');

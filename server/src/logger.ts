@@ -1,23 +1,31 @@
 ﻿import winston from 'winston';
 import path from 'path';
+import util from 'util';
 
 const logger = winston.createLogger({
     level: 'info', // levels    : error, warn, info, http, verbose, debug, silly
     format: winston.format.combine(
         winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         winston.format.errors({ stack: true }),
-        winston.format.printf(({ level, message, timestamp, ...meta }) => {
-            let extra = '';
+        winston.format.printf(({ level, message, timestamp, ...meta  }) => {
+            let formattedMessage;
 
             if (typeof message === 'object') {
-                message = JSON.stringify(message);
+                formattedMessage = util.inspect(message, { depth: null, colors: false });
+            } else {
+                formattedMessage = message;
             }
 
+            let metaString = '';
             if (Object.keys(meta).length > 0) {
-                extra = ' | ' + JSON.stringify(meta);
+                try {
+                    metaString = ' | ' + util.inspect(meta, { depth: null, colors: false });
+                } catch (e) {
+                    metaString = ' | [Unserializable meta]';
+                }
             }
 
-            return `[${timestamp}] ${level.toUpperCase()}: ${message}${extra}`;
+            return `[${timestamp}] ${level.toUpperCase()}: ${formattedMessage}${metaString}`;
         })
     ),
     transports: [

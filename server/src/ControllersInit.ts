@@ -2,7 +2,7 @@
 
 const userAuthInstance = new UserAuth({
     //@ts-ignore
-    baseURL: process.env.VITE_NODE_SERVER_URL,
+    baseURL: process.env.AUTH_SERVER_URL,
     contentType: 'application/json',
 });
 

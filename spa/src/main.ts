@@ -8,15 +8,14 @@ import App from "./App.vue";
 import {useUserStore} from "@/store/UserStore.ts";
 
 const app = createApp(App);
-
-app.use(router);
-app.use(i18n);
 app.use(createPinia());
+app.use(i18n);
 
-initData();
-app.mount('#app');
+(async () => {
+    await useUserStore().init();
+    app.use(router);
+    await router.isReady();
 
+    app.mount('#app')
+})();
 
-function initData(){
-    useUserStore().init();
-}

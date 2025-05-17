@@ -9,11 +9,10 @@ export const useUserStore = defineStore('user', {
 
     actions: {
         async init(): Promise<void>  {
+            console.info("Trying to auth on init...");
             const jwt = localStorage.getItem('jwt');
-            if (jwt && await this.tryLogin({ jwt })) return;
-
             const rt = localStorage.getItem('rt');
-            if (rt && await this.tryLogin({ rt })) return;
+            if ((jwt || rt) && await this.tryLogin({ jwt: jwt, rt: rt})) return;
 
             console.warn('No valid token found');
         },
@@ -27,6 +26,7 @@ export const useUserStore = defineStore('user', {
                 this.setUser(result.data)
                 return true;
             } catch (error) {
+                console.error("Could not init user login");
                 return false;
             }
         },

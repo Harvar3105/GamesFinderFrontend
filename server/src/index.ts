@@ -7,6 +7,7 @@ import fs from 'fs';
 import bodyParser from 'body-parser';
 import logger from './logger.js';
 import userAuthInstance from "./ControllersInit.js";
+import util from 'util';
 
 const __moduleName = fileURLToPath(import.meta.url);
 const __dirName = dirname(__moduleName).replace('server', 'spa'); // TODO: fix hardcode
@@ -22,8 +23,6 @@ app.use(morgan('combined', { stream: accessLogStream }));
 app.use(morgan('dev'));
 
 
-logger.info("LoggerStart");
-logger.info("TEST_OBJECT", { a: 1, b: 2 });
 
 // Get Vue SPA
 app.get('/', (req, res) => {
@@ -33,7 +32,7 @@ app.get('/', (req, res) => {
 // Request login
 app.post('/api/login', async (req, res) => {
     const { username, firstName, lastName, email, password, jwt, rt } = req.body;
-    logger.info("SERVERL: LOGIN request", req.body);
+    logger.info("SERVER: LOGIN request", req.body);
 
     try {
         const response = await userAuthInstance.login({
@@ -46,14 +45,11 @@ app.post('/api/login', async (req, res) => {
             refreshToken: rt,
         });
 
-        if (!response) throw new Error("No response returned. Is Identity server down?")
+        if (!response) throw new Error(`No response returned. Is Identity server down? ${response}`)
 
-        logger.info("SERVERL: LOGIN response", response);
-
-        return res.status(201).send("test");
         return res.status(200).json(response);
     } catch (error: any) {
-        logger.error('Error auth:', error.message)
+        logger.error('Error auth:\n' + util.inspect(error, { depth: null }));
 
         const status = error.response?.status || 500
         const message = error.response?.data?.error || 'Login error'
