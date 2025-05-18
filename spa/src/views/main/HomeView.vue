@@ -7,8 +7,5 @@
     <h1 class="text-4xl font-semibold ">
       {{ $t("Welcome") }}
     </h1>
-    <div>
-      {{ $t("To continue") }}
-    </div>
   </div>
 </template>

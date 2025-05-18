@@ -3,7 +3,7 @@
     <button
       type="button"
       @click="toggleDropdown"
-      class="inline-flex justify-center items-center w-10 h-10 rounded-full bg-amber-300 dark:bg-[#33353b] shadow-sm hover:bg-gray-50"
+      class="inline-flex justify-center items-center w-10 h-10 rounded-full bg-amber-300 dark:bg-[#33353b] shadow-sm"
     >
       <span v-if="currentLang === 'en'">EN</span>
       <span v-else-if="currentLang === 'ru'">RU</span>

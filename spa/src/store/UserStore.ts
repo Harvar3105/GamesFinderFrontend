@@ -31,6 +31,10 @@ export const useUserStore = defineStore('user', {
             }
         },
 
+        isAuthenticated(): boolean {
+            return !!this.user;
+        },
+
         setUser(userData: IUserPayload) {
             if (this.user){
                 this.user.username = userData.username ?? this.user.username;

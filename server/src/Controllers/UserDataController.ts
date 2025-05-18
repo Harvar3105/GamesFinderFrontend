@@ -1,4 +1,4 @@
-﻿import {AxiosController, AxiosControllerOptions} from "./AxiosController";
+﻿import {AxiosController, AxiosControllerOptions} from "./AxiosController.js";
 import logger from '../logger.js';
 import * as process from "node:process";
 import {IUserDataPayload, UserData} from "@shared/entities/User.js";

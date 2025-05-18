@@ -1,13 +1,10 @@
 ﻿<script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import LanguageSwitcher from '../language/LanguageSwitcher.vue'
 import ThemeSwitcher from "../theme/ThemeSwitcher.vue";
+import ProfileAvatar from "@/views/widgets/layout/ProfileAvatar.vue";
+import {useUserStore} from "@/store/UserStore.ts";
 
-const { locale } = useI18n();
-
-const changeLanguage = (lang: string) => {
-  locale.value = lang
-}
+const userStore = useUserStore();
 </script>
 
 <template>
@@ -30,8 +27,10 @@ const changeLanguage = (lang: string) => {
       </li>
     </ul>
     <div class="flex items-center justify-around gap-5">
-      <LanguageSwitcher/>
       <ThemeSwitcher/>
+      <LanguageSwitcher/>
+
+      <ProfileAvatar v-if="userStore.isAuthenticated()"/>
     </div>
   </nav>
 </template>
