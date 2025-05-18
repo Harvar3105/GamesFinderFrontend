@@ -1,9 +1,13 @@
 ﻿import UserAuth from './Controllers/UserAuthController.js';
+import UserData from './Controllers/UserDataController.js';
+import * as process from "node:process";
 
-const userAuthInstance = new UserAuth({
-    //@ts-ignore
-    baseURL: process.env.AUTH_SERVER_URL,
+export const userAuthInstance = new UserAuth({
+    baseURL: process.env.AUTH_SERVER_URL as string,
     contentType: 'application/json',
 });
 
-export default userAuthInstance;
+export const userDataInstance = new UserData({
+    baseURL: process.env.BACK_SERVER_URL as string,
+    contentType: 'application/json',
+})

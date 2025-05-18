@@ -6,7 +6,7 @@ import cors from 'cors';
 import fs from 'fs';
 import bodyParser from 'body-parser';
 import logger from './logger.js';
-import userAuthInstance from "./ControllersInit.js";
+import { userAuthInstance, userDataInstance } from "./ControllersInit.js";
 import util from 'util';
 
 const __moduleName = fileURLToPath(import.meta.url);
@@ -56,7 +56,7 @@ app.post('/api/login', async (req, res) => {
 
         return res.status(status).json({ error: message })
     }
-})
+});
 
 // Request register
 app.post('/api/register', async (req, res) => {
@@ -80,7 +80,43 @@ app.post('/api/register', async (req, res) => {
 
         return res.status(status).json({ error: message })
     }
-})
+});
+
+//Request user data
+app.post('/api/userdata/get', async (req, res) => {
+    const {jwt } = req.body;
+
+    try {
+        const response = await userDataInstance.getUserData(jwt);
+
+        return res.status(200).json(response);
+    } catch (error: any) {
+        logger.error('Error user data get:', error.message);
+
+        const status = error.response?.status || 500
+        const message = error.response?.data?.error || 'Error user data get'
+
+        return res.status(status).json({ error: message })
+    }
+});
+
+//Save user data
+app.post('/api/userdata/save', async (req, res) => {
+    const {wishlist, avatarName, avatarContent, avatarType, jwt} = req.body;
+
+    try {
+        const response = await userDataInstance.saveUserData({wishlist, avatarName, avatarContent, avatarType}, jwt);
+
+        return res.status(200).json(response);
+    } catch (error: any) {
+        logger.error('Error user data save:', error.message);
+
+        const status = error.response?.status || 500
+        const message = error.response?.data?.error || 'Error user data save'
+
+        return res.status(status).json({ error: message })
+    }
+});
 
 
 app.listen(port, () => {

@@ -9,7 +9,7 @@ export default class UserAuthController extends AxiosController{
         super(config);
     }
 
-    public async register(user: IUserPayload): Promise<IUserPayload | null> {
+    public async register(user: IUserPayload): Promise<User | null> {
         try {
             const response = await this.post<IUserPayload>(process.env.AUTH_SERVER_REGISTER_URL as string, user);
             if (response.status !== 200){
@@ -23,7 +23,7 @@ export default class UserAuthController extends AxiosController{
         }
     }
 
-    public async login(userdata: IUserPayload): Promise<IUserPayload | null> {
+    public async login(userdata: IUserPayload): Promise<User | null> {
         if (userdata.password === undefined && (userdata.jwt === undefined && userdata.refreshToken === undefined)) {
             return null;
         }
