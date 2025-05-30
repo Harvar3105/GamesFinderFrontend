@@ -47,7 +47,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import axios from 'axios'
-import router from "@/router.ts";
+import router, {routeNames} from "@/router.ts";
+import {useUserStore} from "@/store/user-store.ts";
 
 const username = ref('');
 const email = ref('');
@@ -55,6 +56,8 @@ const firstName = ref('');
 const lastName = ref('');
 const password = ref('');
 const confirmPassword = ref('');
+
+const userStore = useUserStore();
 
 const handleSubmit = async (e: Event) => {
   e.preventDefault();
@@ -73,8 +76,11 @@ const handleSubmit = async (e: Event) => {
       password: password.value
     })
 
-    alert('Registration successful!');
+    // alert('Registration successful!');
     console.log(response.data);
+    userStore.setUser(response.data);
+
+    await router.push(routeNames.home);
   } catch (error) {
     console.error(error);
     alert('Registration failed.');
@@ -82,6 +88,6 @@ const handleSubmit = async (e: Event) => {
 }
 
 const goToLogin = () => {
-  router.push('login');
+  router.push(routeNames.login);
 }
 </script>
