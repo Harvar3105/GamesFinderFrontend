@@ -1,17 +1,12 @@
 ﻿import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from "@/views/main/HomeView.vue";
-import AboutView from "@/views/main/AboutView.vue";
-import RegistrationView from "@/views/user/RegistrationView.vue";
 import {useUserStore} from "@/store/UserStore.ts";
-import LoginView from "@/views/user/LoginView.vue";
-import UserProfileView from "@/views/user/UserProfileView.vue";
 
 const routes = [
-    { path: '/', name: 'home', component: HomeView },
-    { path: '/about', name: 'about', component: AboutView },
-    { path: '/register', name: 'register', component: RegistrationView},
-    { path: '/login', name: 'login', component: LoginView},
-    { path: '/profile', name: 'profile', component: UserProfileView},
+    { path: '/', name: 'home', component: import("@/views/main/HomeView.vue") },
+    { path: '/about', name: 'about', component: import("@/views/main/AboutView.vue") },
+    { path: '/register', name: 'register', component: import("@/views/user/RegistrationView.vue")},
+    { path: '/login', name: 'login', component: import("@/views/user/LoginView.vue")},
+    { path: '/profile', name: 'profile', component: import("@/views/user/UserProfileView.vue")},
 ];
 
 const router = createRouter({
