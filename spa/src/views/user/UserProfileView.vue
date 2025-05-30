@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import {useUserStore} from "@/store/UserStore.ts";
+import {useUserStore} from "@/store/user-store.ts";
 import {computed, ref} from "vue";
 import TextDisplayField from "@/views/widgets/fields/TextDisplayField.vue";
 import UniversalDialog from "@/views/widgets/dialog/UniversalDialog.vue";

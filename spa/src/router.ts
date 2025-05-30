@@ -1,5 +1,5 @@
 ﻿import { createRouter, createWebHistory } from 'vue-router'
-import {useUserStore} from "@/store/UserStore.ts";
+import {useUserStore} from "@/store/user-store.ts";
 
 const routes = [
     { path: '/', name: 'home', component: import("@/views/main/HomeView.vue") },

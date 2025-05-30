@@ -31,7 +31,7 @@
 import { ref, computed } from 'vue';
 import { onClickOutside } from '@vueuse/core'
 import { useRouter } from 'vue-router';
-import { useUserStore } from '@/store/UserStore.ts'; // путь к твоему store может отличаться
+import { useUserStore } from '@/store/user-store.ts'; // путь к твоему store может отличаться
 
 const userStore = useUserStore();
 const router = useRouter();

@@ -2,7 +2,7 @@
 import LanguageSwitcher from '../language/LanguageSwitcher.vue'
 import ThemeSwitcher from "../theme/ThemeSwitcher.vue";
 import ProfileAvatar from "@/views/widgets/layout/ProfileAvatar.vue";
-import {useUserStore} from "@/store/UserStore.ts";
+import {useUserStore} from "@/store/user-store.ts";
 
 const userStore = useUserStore();
 </script>

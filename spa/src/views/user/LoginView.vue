@@ -28,7 +28,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import router from "@/router.ts";
-import {useUserStore} from "@/store/UserStore.ts";
+import {useUserStore} from "@/store/user-store.ts";
 
 const email = ref('');
 const password = ref('');
