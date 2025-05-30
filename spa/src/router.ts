@@ -4,12 +4,14 @@ import AboutView from "@/views/main/AboutView.vue";
 import RegistrationView from "@/views/user/RegistrationView.vue";
 import {useUserStore} from "@/store/UserStore.ts";
 import LoginView from "@/views/user/LoginView.vue";
+import UserProfileView from "@/views/user/UserProfileView.vue";
 
 const routes = [
     { path: '/', name: 'home', component: HomeView },
     { path: '/about', name: 'about', component: AboutView },
     { path: '/register', name: 'register', component: RegistrationView},
     { path: '/login', name: 'login', component: LoginView},
+    { path: '/profile', name: 'profile', component: UserProfileView},
 ];
 
 const router = createRouter({

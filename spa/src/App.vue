@@ -34,7 +34,7 @@ onBeforeUnmount(() => {
     <header
         ref="headerRef"
         :style="{ top: headerTop }"
-        class="sticky transition-all duration-700 top-0 bg-white dark:bg-[#1a1a1e] z-50 shadow-md">
+        class="sticky transition-all duration-700 top-0 z-50 shadow-md">
       <Navigation />
     </header>
 

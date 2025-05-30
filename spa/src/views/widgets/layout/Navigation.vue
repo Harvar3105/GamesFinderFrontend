@@ -8,7 +8,7 @@ const userStore = useUserStore();
 </script>
 
 <template>
-  <nav class="navbar flex items-center justify-between gap-5 px-5 py-3 border-b-1 border-b-gray-300
+  <nav class="navbar flex items-center justify-between gap-5 px-5 py-3 border-b-1 bg-white dark:bg-[#1a1a1e] border-b-gray-300
           dark:border-b-gray-600">
     <ul class="flex gap-6">
       <li class="rounded bg-amber-300 dark:bg-[#33353b] p-2">
