@@ -15,5 +15,8 @@
     "baseUrl": "."
   },
   "exclude": ["dist"],
-  "include": ["src"]
+  "include": [
+    "src",
+    "../env.d.ts"
+  ]
 }

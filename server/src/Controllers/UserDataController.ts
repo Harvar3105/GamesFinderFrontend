@@ -2,6 +2,7 @@
 import logger from '../logger.js';
 import * as process from "node:process";
 import {IUserDataPayload, UserData} from "@shared/entities/User.js";
+import ResponseError from "../Helpers/ResponseError";
 
 export default class UserDataController extends AxiosController {
 
@@ -9,7 +10,7 @@ export default class UserDataController extends AxiosController {
         super(config);
     }
 
-    public async getUserData(jwt: string): Promise<UserData | null> {
+    public async getUserData(jwt: string): Promise<UserData | ResponseError> {
         try {
             const response = await this.get<IUserDataPayload>(
                 process.env.BACK_SERVER_USER_DATA_URL as string,
@@ -19,18 +20,15 @@ export default class UserDataController extends AxiosController {
                     }
                 }
             );
-            if (response.status !== 200){
-                throw new Error(`Not succeeded, ${response.data}`);
-            }
 
             return response.data as UserData;
-        } catch (error){
-            logger.error(error);
-            return null;
+        } catch (e: any){
+            logger.error(`User data get request: ${e.status}\n${e.stack}\n`);
+            return new ResponseError(e.status, e.stack);
         }
     }
 
-    public async saveUserData(data: IUserDataPayload, jwt: string): Promise<boolean | null> {
+    public async saveUserData(data: IUserDataPayload, jwt: string): Promise<void | ResponseError> {
         try {
             const response = await this.post(
                 process.env.BACK_SERVER_USER_DATA_URL as string,
@@ -41,14 +39,10 @@ export default class UserDataController extends AxiosController {
                     }
                 }
             );
-            if (response.status !== 200){
-                throw new Error(`Not succeeded, ${response.data}`);
-            }
 
-            return true;
-        } catch (error){
-            logger.error(error);
-            return null;
+        } catch (e: any){
+            logger.error(`User data save request: ${e.status}\n${e.stack}\n`);
+            return new ResponseError(e.status, e.stack);
         }
     }
 }

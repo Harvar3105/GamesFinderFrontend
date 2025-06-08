@@ -46,9 +46,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import axios from 'axios'
 import router, {routeNames} from "@/router.ts";
 import {useUserStore} from "@/store/user-store.ts";
+import {controller} from "@/axios/BackendController.ts";
 
 const username = ref('');
 const email = ref('');
@@ -67,23 +67,10 @@ const handleSubmit = async (e: Event) => {
     return;
   }
 
-  try {
-    const response = await axios.post(import.meta.env.VITE_NODE_SERVER_URL + import.meta.env.VITE_NODE_SERVER_REGISTER_PATH, {
-      username: username.value,
-      email: email.value,
-      firstName: firstName.value,
-      lastName: lastName.value,
-      password: password.value
-    })
-
-    // alert('Registration successful!');
-    console.log(response.data);
-    userStore.setUser(response.data);
-
+  let user = await controller.doRegister(username.value, email.value, firstName.value, lastName.value, password.value);
+  if (user) {
+    userStore.setUser(user);
     await router.push(routeNames.home);
-  } catch (error) {
-    console.error(error);
-    alert('Registration failed.');
   }
 }
 

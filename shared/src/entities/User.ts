@@ -1,7 +1,7 @@
-﻿import {readFileAsBase64} from "../helpers/ReadFileAsBase64";
+﻿import {readFileAsBase64} from "../helpers";
+import {Entity, IEntity} from "./Entity";
 
-export interface IUser {
-    id: string;
+export interface IUser extends IEntity {
     username: string,
     firstName: string,
     lastName: string,
@@ -12,7 +12,7 @@ export interface IUser {
     refreshToken?: string | null,
 }
 
-export interface IUserData {
+export interface IUserData extends IEntity{
     id: string
     wishlist: string[]
     avatarName?: string | null
@@ -23,8 +23,7 @@ export interface IUserData {
 export interface IUserPayload extends Partial<Omit<IUser, 'data'>> {}
 export interface IUserDataPayload extends Partial<IUserData> {}
 
-export class User implements IUser{
-    public id: string;
+export class User extends Entity implements IUser{
     public username: string;
     public firstName: string;
     public lastName: string;
@@ -36,7 +35,10 @@ export class User implements IUser{
     public data?: IUserData | null;
 
     constructor(data: IUser) {
+        super(data);
         this.id = data.id;
+        this.createdAt = data.createdAt;
+        this.updatedAt = data.updatedAt;
         this.username = data.username;
         this.firstName = data.firstName;
         this.lastName = data.lastName;
@@ -52,14 +54,14 @@ export class User implements IUser{
     }
 }
 
-export class UserData implements IUserData{
-    public id: string;
+export class UserData extends Entity implements IUserData{
     public wishlist: string[];
     public avatarName?: string | null
     public avatarContent?: string | null
     public avatarType?: string | null
 
     constructor(data: IUserData) {
+        super(data);
         this.id = data.id;
         this.wishlist = data.wishlist;
         this.avatarName = data.avatarName;

@@ -1,6 +1,7 @@
 ﻿import { defineStore } from 'pinia'
 import {IUser, IUserPayload, User} from "@shared/entities/User.ts";
 import axios from "axios";
+import {controller} from "@/axios/BackendController.ts";
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -12,19 +13,19 @@ export const useUserStore = defineStore('user', {
             console.info("Trying to auth on init...");
             const jwt = localStorage.getItem('jwt');
             const rt = localStorage.getItem('rt');
-            if ((jwt || rt) && await this.tryLogin({ jwt: jwt, rt: rt})) return;
+            if ((jwt || rt) && await this.tryInitialLogin({ jwt: jwt, rt: rt})) return;
 
             console.warn('No valid token found');
         },
 
-        async tryLogin (data: any) {
+        async tryInitialLogin (data: any) {
             try {
-                const result = await axios.post(
-                    import.meta.env.VITE_NODE_SERVER_URL + import.meta.env.VITE_NODE_SERVER_LOGIN_PATH,
-                    data
-                );
-                this.setUser(result.data)
-                return true;
+                const result = await controller.doLoginInitial(data.jwt, data.rt);
+                if (result) {
+                    result.refreshToken = data.rt;
+                    this.setUser(result);
+                    return true;
+                }
             } catch (error) {
                 console.error("Could not init user login");
                 return false;
@@ -48,6 +49,13 @@ export const useUserStore = defineStore('user', {
                 this.user = new User(userData as IUser);
             }
 
+            this.saveUserTokens();
+        },
+
+        setUserTokens(jwt: string, rt: string): void {
+            if (!this.user) return;
+            this.user.jwt = jwt;
+            this.user.refreshToken = rt;
             this.saveUserTokens();
         },
 

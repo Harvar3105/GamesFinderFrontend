@@ -14,5 +14,8 @@
       "@shared/*": ["../shared/dist/types/*"]
     }
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "../env.d.ts"
+  ]
 }
