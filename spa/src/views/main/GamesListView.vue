@@ -7,10 +7,8 @@
         <th class="border p-2">Image</th>
         <th class="border p-2">Name</th>
         <th class="border p-2">Description</th>
-        <th class="border p-2">Vendor 1</th>
-        <th class="border p-2">Vendor 1 Price</th>
-        <th class="border p-2">Vendor 2</th>
-        <th class="border p-2">Vendor 2 Price</th>
+        <th class="border p-2">Steam</th>
+        <th class="border p-2">Instant Gaming</th>
         <th class="border p-2">Actions</th>
       </tr>
       </thead>
@@ -22,10 +20,22 @@
           </td>
           <td class="border p-2">{{ item.name }}</td>
           <td class="border p-2">{{ item.description }}</td>
-          <td class="border p-2">{{ item.offers.find(o => o.vendor == EVendor.Steam)?.vendor ?? '-' }}</td>
-          <td class="border p-2">{{ item.offers.find(o => o.vendor == EVendor.Steam)?.prices.entries() }}</td>
-          <td class="border p-2">{{ item.offers.find(o => o.vendor == EVendor.InstantGaming)?.vendor ?? '-'  }}</td>
-          <td class="border p-2">{{ item.offers.find(o => o.vendor == EVendor.InstantGaming)?.prices.entries() }} €</td>
+          <td class="border p-2 whitespace-pre-line">
+            <div v-if="item.offers && item.offers.find(o => o.vendor == EVendor.Steam)?.prices">
+              <div v-for="[currency, priceObj] in Object.entries(item.offers.find(o => o.vendor == EVendor.Steam)?.prices || {})" :key="currency">
+                {{ currency }}: initial {{ priceObj.initial }}, current {{ priceObj.current }}
+              </div>
+            </div>
+            <div v-else>-</div>
+          </td>
+          <td class="border p-2 whitespace-pre-line">
+            <div v-if="item.offers && item.offers.find(o => o.vendor == EVendor.InstantGaming)?.prices">
+              <div v-for="[currency, priceObj] in Object.entries(item.offers.find(o => o.vendor == EVendor.InstantGaming)?.prices || {})" :key="currency">
+                {{ currency }}: initial {{ priceObj.initial }}, current {{ priceObj.current }}
+              </div>
+            </div>
+            <div v-else>-</div>
+          </td>
           <td class="border p-2 text-center">
   <!--          <button @click="onEdit(item)" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm">-->
   <!--            Edit-->
@@ -41,12 +51,20 @@
 </template>
 
 <script setup lang="ts">
+import {ref, onMounted} from 'vue'
 import {controller} from "@/axios/BackendController.ts";
 import {EVendor} from "@shared/enums";
+import type {IGame} from "@shared/entities";
 
-let games = await controller.getGamesWithOffersPaged(1, 50);
-if (!games){
-  games = [];
-  alert("No games found.");
-}
+const games = ref<IGame[]>([])
+
+onMounted(async () => {
+  const result = await controller.getGamesWithOffersPaged(1, 50);
+  if (!result) {
+    alert("No games found.");
+  } else {
+    console.log(result.items);
+    games.value = result.items;
+  }
+});
 </script>

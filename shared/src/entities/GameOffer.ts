@@ -27,10 +27,10 @@ export class GameOffer extends Entity implements IGameOffer {
 }
 
 export class PriceRange {
-    public initial: number;
-    public current: number;
+    public initial?: number;
+    public current?: number;
 
-    constructor(initial: number, current: number) {
+    constructor(initial?: number, current?: number) {
         this.initial = initial;
         this.current = current;
     }

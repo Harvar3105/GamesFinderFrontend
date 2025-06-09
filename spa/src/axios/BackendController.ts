@@ -173,15 +173,24 @@ class BackendController {
         }
     }
 
-    public async getGamesWithOffersPaged(page: number, pageSize: number): Promise<IGame[] | null> {
+    public async getGamesWithOffersPaged(page: number, pageSize: number): Promise<GamesPagedResult | null> {
         try {
-            const response = await this.post<IGame[]>(import.meta.env.VITE_NODE_SERVER_GAMES_GET_PAGED, {page: page, pageSize: pageSize});
+            const response = await this.post<GamesPagedResult>
+            (import.meta.env.VITE_NODE_SERVER_GAMES_GET_PAGED, {page: page, pageSize: pageSize});
 
-            return response.data as Game[];
+            return response.data as GamesPagedResult;
         } catch (error) {
             return null;
         }
     }
+}
+
+export interface GamesPagedResult{
+    items: IGame[];
+    count: number;
+    totalCount: number;
+    page: number;
+    pageSize: number;
 }
 
 export const controller = new BackendController();
