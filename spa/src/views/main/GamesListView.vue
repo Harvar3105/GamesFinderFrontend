@@ -1,29 +1,43 @@
 ﻿<template>
   <div class="p-30">
     <table class="table-auto w-full border-collapse border border-gray-300">
-      <thead class="bg-gray-200">
+      <thead class="">
       <tr>
         <th class="border p-2">#</th>
         <th class="border p-2">Image</th>
         <th class="border p-2">Name</th>
         <th class="border p-2">Description</th>
-        <th class="border p-2">Steam</th>
-        <th class="border p-2">Instant Gaming</th>
+        <th class="border p-2">
+          <div class="px-2">Steam</div>
+          <span class="px-2">Initial</span>
+          <span>|</span>
+          <span class="px-2">Current</span>
+        </th>
+        <th class="border p-2">
+          <div class="px-2">Instant Gaming</div>
+          <span class="px-2">Initial</span>
+          <span>|</span>
+          <span class="px-2">Current</span>
+        </th>
         <th class="border p-2">Actions</th>
       </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in games" :key="item.id" class="hover:bg-gray-50">
+        <tr v-for="(item, index) in games" :key="item.id" class="hover:bg-gray-700">
           <td class="border p-2 text-center">{{ index + 1 }}</td>
-          <td class="border p-2 text-center">
-            <img :src="item.headerImage" alt="game image" class="h-10 w-15 object-contain mx-auto" />
+          <td class="border p-2 text-center ">
+            <img :src="item.headerImage" alt="game image" class="h-24 w-32 object-cover mx-auto" />
           </td>
           <td class="border p-2">{{ item.name }}</td>
-          <td class="border p-2">{{ item.description }}</td>
+          <td class="border p-2 align-top max-w-[600px]">
+            <div class="line-clamp-4 break-words overflow-hidden">
+              {{ item.description }}
+            </div>
+          </td>
           <td class="border p-2 whitespace-pre-line">
             <div v-if="item.offers && item.offers.find(o => o.vendor == EVendor.Steam)?.prices">
               <div v-for="[currency, priceObj] in Object.entries(item.offers.find(o => o.vendor == EVendor.Steam)?.prices || {})" :key="currency">
-                {{ currency }}: initial {{ priceObj.initial }}, current {{ priceObj.current }}
+                {{ currency }}: {{ priceObj.initial }} | {{ priceObj.current }}
               </div>
             </div>
             <div v-else>-</div>
@@ -31,7 +45,7 @@
           <td class="border p-2 whitespace-pre-line">
             <div v-if="item.offers && item.offers.find(o => o.vendor == EVendor.InstantGaming)?.prices">
               <div v-for="[currency, priceObj] in Object.entries(item.offers.find(o => o.vendor == EVendor.InstantGaming)?.prices || {})" :key="currency">
-                {{ currency }}: initial {{ priceObj.initial }}, current {{ priceObj.current }}
+                {{ currency }}: {{ priceObj.initial }} | {{ priceObj.current }}
               </div>
             </div>
             <div v-else>-</div>
@@ -63,7 +77,6 @@ onMounted(async () => {
   if (!result) {
     alert("No games found.");
   } else {
-    console.log(result.items);
     games.value = result.items;
   }
 });
