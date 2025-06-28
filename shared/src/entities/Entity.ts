@@ -1,5 +1,5 @@
 ﻿export abstract class Entity implements IEntity {
-    public id: string;
+    public id: string | null;
     public createdAt: Date;
     public updatedAt: Date;
 
@@ -11,7 +11,7 @@
 }
 
 export interface IEntity {
-    id: string;
+    id: string | null;
     createdAt: Date;
     updatedAt: Date;
 }

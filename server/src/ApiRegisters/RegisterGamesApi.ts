@@ -26,4 +26,16 @@ export default function RegisterGamesApi(app: Express) {
 
         return res.status(200).json(response);
     })
+
+    app.post(process.env.VITE_NODE_SERVER_CRAWL_STEAM!, async (req, res) => {
+        const { gamesIds, forceUpdate } = req.body;
+
+        const response = await gamesInstance.crawlSteam({gamesIds, forceUpdate}, GetHeaders(req, res));
+
+        if (response instanceof ResponseError) {
+            return res.status(response.status).json(response.error);
+        }
+
+        return res.status(200).json(response);
+    })
 }

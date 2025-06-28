@@ -1,5 +1,5 @@
 ﻿import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
-import {IUser, IUserPayload, User} from "@shared/entities/User.ts";
+import {IUser, IUserDataPayload, IUserPayload, User, UserData} from "@shared/entities/User.ts";
 import {Game, IGame} from "@shared/entities";
 import {useUserStore} from "@/store/user-store.ts";
 
@@ -134,6 +134,28 @@ class BackendController {
         }
     }
 
+    public async getUserData(): Promise<UserData | null>{
+        try {
+            const response = await this.get<UserData>(import.meta.env.VITE_NODE_SERVER_USERDATA_GET);
+
+            return response.data as UserData;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    public async saveUserData (data: UserData): Promise<boolean> {
+        try {
+            const response = await this.post(import.meta.env.VITE_NODE_SERVER_USERDATA_SAVE, data);
+
+            if (response.status !== 200) return false;
+
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+
     public async doLogin(email: string, password: string): Promise<IUser | null> {
         try {
             const response = await this.post<IUserPayload>(import.meta.env.VITE_NODE_SERVER_LOGIN_PATH, {
@@ -181,6 +203,16 @@ class BackendController {
             return response.data as GamesPagedResult;
         } catch (error) {
             return null;
+        }
+    }
+
+    public async crawlSteam(gamesIds: number[], forceUpdate: boolean): Promise<string> {
+        try {
+            const response = await this.post(import.meta.env.VITE_NODE_SERVER_CRAWL_STEAM, {gamesIds, forceUpdate});
+
+            return response.data as string;
+        } catch (error) {
+            return "ERROR OCCURED!"
         }
     }
 }

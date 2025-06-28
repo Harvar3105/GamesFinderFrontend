@@ -14,11 +14,13 @@
     readonly VITE_NODE_SERVER_UPDATE_TOKENS: string;
     readonly VITE_NODE_SERVER_VALIDATE_TOKENS: string;
 
-    readonly VITE_MODE_SERVER_USERDATA_GET: string;
-    readonly VITE_MODE_SERVER_USERDATA_SAVE: string;
+    readonly VITE_NODE_SERVER_USERDATA_GET: string;
+    readonly VITE_NODE_SERVER_USERDATA_SAVE: string;
 
     readonly VITE_NODE_SERVER_GAMES_GET_ALL: string;
     readonly VITE_NODE_SERVER_GAMES_GET_PAGED: string;
+
+    readonly VITE_NODE_SERVER_CRAWL_STEAM: string;
 
     readonly BACK_SERVER_URL: string;
     readonly BACK_SERVER_USER_DATA_URL: string;

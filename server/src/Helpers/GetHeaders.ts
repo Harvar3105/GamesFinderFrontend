@@ -1,8 +1,14 @@
-﻿import express, {Request, Response} from "express";
+﻿import {Request, Response} from "express";
 
 export default function GetHeaders(req: Request, res: Response){
     const headers = { ...req.headers };
-    delete headers.host;
+    const authorization = headers.authorization;
+    const accept = headers.accept;
+    const contentType = headers.contentType;
 
-    return { headers: headers };
+    return { headers: {
+        'Authorization': authorization,
+        'Content-Type': contentType,
+        'Accept': accept,
+        } };
 }

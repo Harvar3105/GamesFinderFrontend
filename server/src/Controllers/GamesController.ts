@@ -31,4 +31,15 @@ export default class GamesController extends AxiosController{
             return new ResponseError(e.status, e.data);
         }
     }
+
+    public async crawlSteam(data: {gamesIds: number[], forceUpdate: boolean}, config?: AxiosRequestConfig): Promise<string | ResponseError> {
+        try {
+            const response = await this.post<string>(process.env.BACK_SERVER_STEAM_CRAWLER as string, data, config);
+
+            return response.data as string;
+        } catch (e: any){
+            logger.error(`Post games crawl steam: ${e.status}\n${e.data}\n`);
+            return new ResponseError(e.status, e.data);
+        }
+    }
 }

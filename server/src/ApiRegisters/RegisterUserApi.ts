@@ -1,9 +1,10 @@
 ﻿import {Express} from "express";
 import logger from "../logger.js";
 import {userAuthInstance, userDataInstance} from "../ControllersInit.js";
-import util from "util";
 import * as process from "node:process";
 import ResponseError from "../Helpers/ResponseError";
+import GetHeaders from "../Helpers/GetHeaders";
+import { UserData } from "@shared/entities";
 
 export default function RegisterUserApi(app: Express) {
 
@@ -39,6 +40,14 @@ export default function RegisterUserApi(app: Express) {
             return res.status(response.status).json(response.error);
         }
 
+        const userDataResponse = await userDataInstance.getUserData({headers: {'Authorization': `Bearer ${response.jwt ?? jwt}`}});
+        logger.info(`User Data: ${JSON.stringify(userDataResponse)}`);
+        if (userDataResponse instanceof ResponseError) {
+            response.data = {userId: response.id!, wishlist: Array(), id: null, createdAt: new Date(), updatedAt: new Date()} as UserData;
+        } else {
+            response.data = userDataResponse;
+        }
+
         return res.status(200).json(response);
 
     });
@@ -59,14 +68,14 @@ export default function RegisterUserApi(app: Express) {
             return res.status(response.status).json(response.error);
         }
 
+        response.data = {userId: response.id!, wishlist: Array(), id: null, createdAt: new Date(), updatedAt: new Date()} as UserData;
+
         return res.status(200).json(response)
     });
 
     //Request user data
-    app.post(process.env.VITE_MODE_SERVER_USERDATA_GET!, async (req, res) => {
-        const {jwt } = req.body;
-
-        const response = await userDataInstance.getUserData(jwt);
+    app.get(process.env.VITE_NODE_SERVER_USERDATA_GET!, async (req, res) => {
+        const response = await userDataInstance.getUserData(GetHeaders(req, res));
 
         if (response instanceof ResponseError) {
             return res.status(response.status).json(response.error);
@@ -76,10 +85,18 @@ export default function RegisterUserApi(app: Express) {
     });
 
     //Save user data
-    app.post(process.env.VITE_MODE_SERVER_USERDATA_SAVE!, async (req, res) => {
-        const {wishlist, avatarName, avatarContent, avatarType, jwt} = req.body;
+    app.post(process.env.VITE_NODE_SERVER_USERDATA_SAVE!, async (req, res) => {
+        const {userId, wishlist, avatarName, avatarContent, avatarType} = req.body;
 
-        const response = await userDataInstance.saveUserData({wishlist, avatarName, avatarContent, avatarType}, jwt);
+        const response = await userDataInstance.saveUserData(
+            {
+                userId: userId ?? null,
+                usersWishlist: wishlist ?? null,
+                avatarFileName: avatarName ?? null,
+                avatarContent: avatarContent ?? null,
+                avatarFileType: avatarType ?? null,
+            },
+            GetHeaders(req, res));
 
         if (response instanceof ResponseError) {
             return res.status(response.status).json(response.error);

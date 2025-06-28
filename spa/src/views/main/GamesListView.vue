@@ -26,7 +26,7 @@
         <tr v-for="(item, index) in games" :key="item.id" class="hover:bg-gray-700">
           <td class="border p-2 text-center">{{ index + 1 }}</td>
           <td class="border p-2 text-center ">
-            <img :src="item.headerImage" alt="game image" class="h-24 w-32 object-cover mx-auto" />
+            <img :src="item.headerImage" alt="game image" class="h-24 w-32 object-cover mx-auto transition-transform duration-300 hover:scale-110" />
           </td>
           <td class="border p-2">{{ item.name }}</td>
           <td class="border p-2 align-top max-w-[600px]">

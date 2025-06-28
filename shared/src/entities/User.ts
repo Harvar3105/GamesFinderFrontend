@@ -10,18 +10,22 @@ export interface IUser extends IEntity {
     email?: string | null,
     jwt?: string | null,
     refreshToken?: string | null,
+    data?: IUserData | null,
 }
 
 export interface IUserData extends IEntity{
-    id: string
-    wishlist: string[]
+    id: string | null
+    userId: string
+    wishlist: number[]
     avatarName?: string | null
     avatarContent?: string | null
     avatarType?: string | null
 }
 
 export interface IUserPayload extends Partial<Omit<IUser, 'data'>> {}
-export interface IUserDataPayload extends Partial<IUserData> {}
+export interface IUserDataPayload extends Partial<Omit<IUserData, 'wishlist'>> {
+    usersWishlist: number[] | null;
+}
 
 export class User extends Entity implements IUser{
     public username: string;
@@ -47,6 +51,7 @@ export class User extends Entity implements IUser{
         this.email = data.email;
         this.jwt = data.jwt;
         this.refreshToken = data.refreshToken;
+        this.data = data.data;
     }
 
     public dropPassword(): void {
@@ -55,13 +60,15 @@ export class User extends Entity implements IUser{
 }
 
 export class UserData extends Entity implements IUserData{
-    public wishlist: string[];
+    public userId: string;
+    public wishlist: number[];
     public avatarName?: string | null
     public avatarContent?: string | null
     public avatarType?: string | null
 
     constructor(data: IUserData) {
         super(data);
+        this.userId = data.userId;
         this.id = data.id;
         this.wishlist = data.wishlist;
         this.avatarName = data.avatarName;
