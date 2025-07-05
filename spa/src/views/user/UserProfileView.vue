@@ -80,8 +80,6 @@ const saveWishlist = async () => {
   } else {
     console.error(`Could not parse ${wishlist.value}`);
   }
-
-  //TODO: send request to backend. Display timer
 }
 
 function parseWishlist(wishlist: string): number[] | null {

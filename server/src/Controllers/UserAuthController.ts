@@ -16,8 +16,8 @@ export default class UserAuthController extends AxiosController{
 
             return {jwt: response.data.token, rt: response.data.refreshToken};
         } catch (e: any) {
-            logger.error(`Tokens update request: ${e.status}\n${e.stack}\n`);
-            return new ResponseError(e.status, e.data);
+            logger.error(`Tokens update request: ${e.status}\n${e.message}\n\n`);
+            return new ResponseError(e.status, e.stack);
         }
     }
 
@@ -27,8 +27,8 @@ export default class UserAuthController extends AxiosController{
 
             return response.data as User;
         } catch (e: any) {
-            logger.error(`User register request: ${e.status}\n${e.stack}\n`);
-            return new ResponseError(e.status, e.data);
+            logger.error(`User register request: ${e.status}\n${e.message}\n\n`);
+            return new ResponseError(e.status, e.stack);
         }
     }
 
@@ -43,8 +43,8 @@ export default class UserAuthController extends AxiosController{
 
             return response.data as User;
         } catch (e: any){
-            logger.error(`User login request: ${e.status}\n${e.stack}\n`);
-            return new ResponseError(e.status, e.data);
+            logger.error(`User login request: ${e.status}\n${e.message}\n}\n`);
+            return new ResponseError(e.status, e.stack);
         }
     }
 }

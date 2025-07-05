@@ -23,7 +23,7 @@
       </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in games" :key="item.id" class="hover:bg-gray-700">
+        <tr v-for="(item, index) in games" :key="item.id!" class="hover:bg-gray-700">
           <td class="border p-2 text-center">{{ index + 1 }}</td>
           <td class="border p-2 text-center ">
             <img :src="item.headerImage" alt="game image" class="h-24 w-32 object-cover mx-auto transition-transform duration-300 hover:scale-110" />

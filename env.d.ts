@@ -19,6 +19,7 @@
 
     readonly VITE_NODE_SERVER_GAMES_GET_ALL: string;
     readonly VITE_NODE_SERVER_GAMES_GET_PAGED: string;
+    readonly VITE_NODE_SERVER_GAMES_CHECK_BY_STEAM_IDS: string;
 
     readonly VITE_NODE_SERVER_CRAWL_STEAM: string;
 
@@ -28,6 +29,7 @@
 
     readonly BACK_SERVER_GET_ALL_GAMES: string;
     readonly BACK_SERVER_GET_PAGED_GAMES: string;
+    readonly BACK_SERVER_CHECK_EXISTS_MANY_BY_STEAM_IDS: string;
 }
 
 interface ImportMeta {

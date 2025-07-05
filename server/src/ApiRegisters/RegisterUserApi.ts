@@ -1,6 +1,6 @@
 ﻿import {Express} from "express";
 import logger from "../logger.js";
-import {userAuthInstance, userDataInstance} from "../ControllersInit.js";
+import {gamesInstance, userAuthInstance, userDataInstance} from "../ControllersInit.js";
 import * as process from "node:process";
 import ResponseError from "../Helpers/ResponseError";
 import GetHeaders from "../Helpers/GetHeaders";
@@ -88,6 +88,8 @@ export default function RegisterUserApi(app: Express) {
     app.post(process.env.VITE_NODE_SERVER_USERDATA_SAVE!, async (req, res) => {
         const {userId, wishlist, avatarName, avatarContent, avatarType} = req.body;
 
+        const config = GetHeaders(req, res);
+
         const response = await userDataInstance.saveUserData(
             {
                 userId: userId ?? null,
@@ -96,11 +98,19 @@ export default function RegisterUserApi(app: Express) {
                 avatarContent: avatarContent ?? null,
                 avatarFileType: avatarType ?? null,
             },
-            GetHeaders(req, res));
+            config);
 
         if (response instanceof ResponseError) {
             return res.status(response.status).json(response.error);
         }
+
+        const checkWishlistResponse = await gamesInstance.checkExistManyBySteamIds(wishlist.map(String), config);
+
+        if (checkWishlistResponse instanceof ResponseError || checkWishlistResponse.length === 0) {
+            return res.status(200).json(response);
+        }
+
+        await gamesInstance.crawlSteam({gamesIds: checkWishlistResponse.map(Number).filter(n => !isNaN(n)), forceUpdate: true}, config )
 
         return res.status(200).json(response);
     });

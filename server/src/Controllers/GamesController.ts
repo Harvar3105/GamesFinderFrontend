@@ -16,8 +16,8 @@ export default class GamesController extends AxiosController{
 
             return response.data as Game[];
         } catch (e: any){
-            logger.error(`Get all games request: ${e.status}\n${e.data}\n`);
-            return new ResponseError(e.status, e.data);
+            logger.error(`Get all games request: ${e.status}\n${e.message}\n\n`);
+            return new ResponseError(e.status, e.stack);
         }
     }
 
@@ -27,8 +27,8 @@ export default class GamesController extends AxiosController{
 
             return response.data as Game[];
         } catch (e: any){
-            logger.error(`Get games page: ${e.status}\n${e.data}\n`);
-            return new ResponseError(e.status, e.data);
+            logger.error(`Get games page: ${e.status}\n${e.message}\n\n`);
+            return new ResponseError(e.status, e.stack);
         }
     }
 
@@ -38,8 +38,19 @@ export default class GamesController extends AxiosController{
 
             return response.data as string;
         } catch (e: any){
-            logger.error(`Post games crawl steam: ${e.status}\n${e.data}\n`);
-            return new ResponseError(e.status, e.data);
+            logger.error(`Post games crawl steam: ${e.status}\n${e.message}\n\n`);
+            return new ResponseError(e.status, e.stack);
+        }
+    }
+
+    public async checkExistManyBySteamIds(data: string[], config?: AxiosRequestConfig): Promise<string[] | ResponseError> {
+        try {
+            const response = await this.post<string[]>(process.env.BACK_SERVER_CHECK_EXISTS_MANY_BY_STEAM_IDS as string, data, config);
+
+            return response.data as string[];
+        } catch (e: any){
+            logger.error(`Post games exists many by steam ids: ${e.status}\n${e.message}\n\n`);
+            return new ResponseError(e.status, e.stack);
         }
     }
 }
