@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "moduleResolution": "Node",
+    "isolatedModules": true,
+    "strict": true,
+    "outDir": "./dist",
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@/*": ["./src/*"],
+    }
+  },
+  "include": [
+    "src",
+    "env.d.ts"
+  ]
+}
