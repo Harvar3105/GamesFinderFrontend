@@ -121,13 +121,13 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref, watch} from 'vue';
-import {controller} from "../../axios/BackendController.ts";
-import {ECurrency, EVendor} from "../../domain/enums";
-import {IGame, PriceRange} from "../../domain/entities";
+import { onMounted, ref, watch} from 'vue';
+import {ECurrency, EVendor} from "@/domain/enums";
+import {IGame, PriceRange} from "@/domain/entities";
 import GamesFilters from "../../domain/params/gamesFilters.ts";
-import {ESort} from "../../domain/enums/ESort.ts";
-import {EPriceCompare} from "../../domain/enums/EPriceCompare.ts";
+import {ESort} from "@/domain/enums/ESort.ts";
+import {EPriceCompare} from "@/domain/enums/EPriceCompare.ts";
+import {backendInstance} from "@/axios/ControllersInit.ts";
 
 const games = ref<IGame[]>([]);
 
@@ -148,7 +148,7 @@ function getPrice(game: IGame, vendorKey: keyof typeof EVendor | EVendor) : Map<
 }
 
 onMounted(async () => {
-  const result = await controller.getGamesWithOffersPaged(1, 25);
+  const result = await backendInstance.getGamesWithOffersPaged(1, 25);
   if (!result) {
     alert("No games found.");
   } else {
@@ -162,7 +162,7 @@ onMounted(async () => {
 });
 
 const fetchGames = async () => {
-  const result = await controller.getGamesWithOffersPaged(1, 25, filters.value);
+  const result = await backendInstance.getGamesWithOffersPaged(1, 25, filters.value);
   if (!result) {
     games.value = [];
   } else {

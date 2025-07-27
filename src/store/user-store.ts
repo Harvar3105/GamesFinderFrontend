@@ -1,6 +1,6 @@
 ﻿import { defineStore } from 'pinia'
-import {controller} from "../axios/BackendController.ts";
 import {IUser, User, UserData} from "@/domain/entities";
+import {authInstance, userDataInstance} from "@/axios/ControllersInit.ts";
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -19,8 +19,8 @@ export const useUserStore = defineStore('user', {
 
         async tryInitialLogin (data: any) {
             try {
-                const result = await controller.doLoginInitial(data.jwt, data.rt);
-                if (result) {
+                const result = await authInstance.doLoginInitial(data.jwt, data.rt);
+                if (result instanceof User) {
                     result.refreshToken = data.rt;
                     this.setUser(result);
 
@@ -36,7 +36,7 @@ export const useUserStore = defineStore('user', {
             if (!this.user?.data) return;
 
             try {
-                await controller.saveUserData(this.user.data as UserData);
+                await userDataInstance.saveUserData(this.user.data as UserData);
             } catch (error) {
                 console.error("Could not save user data");
                 return;

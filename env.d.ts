@@ -1,27 +1,11 @@
 ﻿interface ImportMetaEnv {
     readonly VITE_PORT: string;
-    readonly SERVER_PORT: string;
 
     readonly AUTH_SERVER_URL: string;
     readonly AUTH_SERVER_LOGIN_URL: string;
     readonly AUTH_SERVER_REGISTER_URL: string;
     readonly AUTH_SERVER_UPDATE_TOKENS: string;
     readonly AUTH_SERVER_VALIDATE_TOKENS: string;
-
-    readonly VITE_NODE_SERVER_URL: string;
-    readonly VITE_NODE_SERVER_REGISTER_PATH: string;
-    readonly VITE_NODE_SERVER_LOGIN_PATH: string;
-    readonly VITE_NODE_SERVER_UPDATE_TOKENS: string;
-    readonly VITE_NODE_SERVER_VALIDATE_TOKENS: string;
-
-    readonly VITE_NODE_SERVER_USERDATA_GET: string;
-    readonly VITE_NODE_SERVER_USERDATA_SAVE: string;
-
-    readonly VITE_NODE_SERVER_GAMES_GET_ALL: string;
-    readonly VITE_NODE_SERVER_GAMES_GET_PAGED: string;
-    readonly VITE_NODE_SERVER_GAMES_CHECK_BY_STEAM_IDS: string;
-
-    readonly VITE_NODE_SERVER_CRAWL_STEAM: string;
 
     readonly BACK_SERVER_URL: string;
     readonly BACK_SERVER_USER_DATA_URL: string;

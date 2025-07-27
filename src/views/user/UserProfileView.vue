@@ -30,13 +30,12 @@
 </template>
 
 <script setup lang="ts">
-import {useUserStore} from "../../store/user-store.ts";
+import {useUserStore} from "@/store/user-store.ts";
 import {computed, ref} from "vue";
 import TextDisplayField from "../widgets/fields/TextDisplayField.vue";
 import UniversalDialog from "../widgets/dialog/UniversalDialog.vue";
 import TextInputField from "../widgets/fields/TextInputField.vue";
-import {controller} from "../../axios/BackendController.ts";
-import {User} from "../../domain/entities/User.ts";
+import {User} from "@/domain/entities";
 
 const fieldsSharedOptions:string = "w-full";
 

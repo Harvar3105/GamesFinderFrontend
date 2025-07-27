@@ -27,8 +27,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import router, {routeNames} from "../../router.ts";
-import {useUserStore} from "../../store/user-store.ts";
-import {controller} from "../../axios/BackendController.ts";
+import {useUserStore} from "@/store/user-store.ts";
+import {authInstance} from "@/axios/ControllersInit.ts";
+import {User} from "@/domain/entities";
 
 const email = ref('');
 const password = ref('');
@@ -38,8 +39,10 @@ const userStore = useUserStore();
 const handleSubmit = async (e: Event) => {
   e.preventDefault();
 
-  let user = await controller.doLogin(email.value, password.value);
-  if (user) {
+  let user = await authInstance.doLogin({
+    email: email.value,
+    password: password.value});
+  if (user instanceof User) {
     userStore.setUser(user);
 
     await router.push(routeNames.home);
