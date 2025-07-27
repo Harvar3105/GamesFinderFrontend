@@ -4,6 +4,7 @@ import {Game} from "@shared/entities";
 import * as process from "node:process";
 import {AxiosRequestConfig} from "axios";
 import ResponseError from "../Helpers/ResponseError";
+import GamesFilters from "@shared/params/gamesFilters";
 
 export default class GamesController extends AxiosController{
     constructor(config: AxiosControllerOptions) {
@@ -27,7 +28,18 @@ export default class GamesController extends AxiosController{
 
             return response.data as Game[];
         } catch (e: any){
-            logger.error(`Get games page: ${e.status}\n${e.message}\n\n`);
+            logger.error(`Get games paged: ${e.status}\n${e.message}\n\n`);
+            return new ResponseError(e.status, e.stack);
+        }
+    }
+
+    public async getGamesPagedWithFilters(data: {page: number, pageSize: number, filters: GamesFilters}, config?: AxiosRequestConfig): Promise<Game[] | ResponseError> {
+        try {
+            const response = await this.post<Game[]>(process.env.BACK_SERVER_GAT_PAGED_WITH_FILTERS as string, data, config);
+
+            return response.data as Game[];
+        } catch (e: any){
+            logger.error(`Get games paged with filters: ${e.status}\n${e.message}\n\n`);
             return new ResponseError(e.status, e.stack);
         }
     }

@@ -2,6 +2,7 @@
 import {IUser, IUserDataPayload, IUserPayload, User, UserData} from "@shared/entities/User.ts";
 import {Game, IGame} from "@shared/entities";
 import {useUserStore} from "@/store/user-store.ts";
+import GamesFilters from "@shared/params/gamesFilters.ts";
 
 class BackendController {
     private readonly instance: AxiosInstance;
@@ -195,10 +196,10 @@ class BackendController {
         }
     }
 
-    public async getGamesWithOffersPaged(page: number, pageSize: number): Promise<GamesPagedResult | null> {
+    public async getGamesWithOffersPaged(page: number, pageSize: number, filters?: GamesFilters): Promise<GamesPagedResult | null> {
         try {
             const response = await this.post<GamesPagedResult>
-            (import.meta.env.VITE_NODE_SERVER_GAMES_GET_PAGED, {page: page, pageSize: pageSize});
+            (import.meta.env.VITE_NODE_SERVER_GAMES_GET_PAGED, {page: page, pageSize: pageSize, filters: filters});
 
             return response.data as GamesPagedResult;
         } catch (error) {

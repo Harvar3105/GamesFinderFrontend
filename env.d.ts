@@ -29,6 +29,7 @@
 
     readonly BACK_SERVER_GET_ALL_GAMES: string;
     readonly BACK_SERVER_GET_PAGED_GAMES: string;
+    readonly BACK_SERVER_GAT_PAGED_WITH_FILTERS: string;
     readonly BACK_SERVER_CHECK_EXISTS_MANY_BY_STEAM_IDS: string;
 }
 

@@ -16,9 +16,15 @@ export default function RegisterGamesApi(app: Express) {
     });
 
     app.post(process.env.VITE_NODE_SERVER_GAMES_GET_PAGED!, async (req, res) => {
-        const { page, pageSize} = req.body;
+        const { page, pageSize, filters} = req.body;
 
-        const response = await gamesInstance.getGamesPaged({page, pageSize}, GetHeaders(req, res));
+        let response;
+        if (!filters) {
+            response = await gamesInstance.getGamesPaged({page, pageSize}, GetHeaders(req, res));
+        } else {
+            response = await gamesInstance.getGamesPagedWithFilters({page, pageSize, filters}, GetHeaders(req, res));
+        }
+
 
         if (response instanceof ResponseError) {
             return res.status(response.status).json(response.error);
