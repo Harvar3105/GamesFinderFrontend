@@ -10,7 +10,7 @@ export default class BackendController extends AxiosController{
 
     public async getAllGamesWithOffers(): Promise<IGame[] | null> {
         try {
-            const response = await this.get<IGame[]>(import.meta.env.BACK_SERVER_GET_ALL_GAMES);
+            const response = await this.get<IGame[]>(import.meta.env.VITE_BACK_SERVER_GET_ALL_GAMES);
 
             return response.data as Game[];
         } catch (error) {
@@ -21,7 +21,7 @@ export default class BackendController extends AxiosController{
     public async getGamesWithOffersPaged(page: number, pageSize: number, filters?: GamesFilters): Promise<GamesPagedResult | null> {
         try {
             const response = await this.post<GamesPagedResult>
-            (import.meta.env.BACK_SERVER_GET_PAGED_GAMES, {page: page, pageSize: pageSize, filters: filters});
+            (import.meta.env.VITE_BACK_SERVER_GET_PAGED_GAMES, {page: page, pageSize: pageSize, filters: filters});
 
             return response.data as GamesPagedResult;
         } catch (error) {
@@ -31,7 +31,7 @@ export default class BackendController extends AxiosController{
 
     public async crawlSteam(gamesIds: number[], forceUpdate: boolean): Promise<string> {
         try {
-            const response = await this.post(import.meta.env.BACK_SERVER_STEAM_CRAWLER, {gamesIds, forceUpdate});
+            const response = await this.post(import.meta.env.VITE_BACK_SERVER_STEAM_CRAWLER, {gamesIds, forceUpdate});
 
             return response.data as string;
         } catch (error) {

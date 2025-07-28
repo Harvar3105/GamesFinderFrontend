@@ -1,7 +1,6 @@
 ﻿import ResponseError from "@/axios/ResponseError.ts";
 import {IUser, IUserPayload, User} from "@/domain/entities";
 import AxiosController, {AxiosControllerOptions} from "@/axios/AxiosController.ts";
-import {AxiosError} from "axios";
 
 export default class AuthController extends AxiosController{
 
@@ -15,7 +14,7 @@ export default class AuthController extends AxiosController{
         }
 
         try {
-            const response = await this.post<IUserPayload>(import.meta.env.AUTH_SERVER_LOGIN_URL, {
+            const response = await this.post<IUserPayload>(import.meta.env.VITE_AUTH_SERVER_LOGIN_URL, {
                 password: userdata.password,
                 email: userdata.email,
             })
@@ -28,7 +27,7 @@ export default class AuthController extends AxiosController{
 
     public async doRegister(user: IUserPayload): Promise<IUser | ResponseError> {
         try {
-            const response = await this.post<IUserPayload>(import.meta.env.AUTH_SERVER_REGISTER_URL, {
+            const response = await this.post<IUserPayload>(import.meta.env.VITE_AUTH_SERVER_REGISTER_URL, {
                 username: user.username,
                 email: user.email,
                 firstName: user.firstName,
@@ -44,7 +43,7 @@ export default class AuthController extends AxiosController{
 
     public async doLoginInitial(jwt: string, rt: string): Promise<IUser | ResponseError> {
         try {
-            const response = await this.post<IUserPayload>(import.meta.env.AUTH_SERVER_LOGIN_URL, {
+            const response = await this.post<IUserPayload>(import.meta.env.VITE_AUTH_SERVER_LOGIN_URL, {
                 jwt, rt
             })
             return response.data as User;
