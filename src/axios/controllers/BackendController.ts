@@ -20,8 +20,16 @@ export default class BackendController extends AxiosController{
 
     public async getGamesWithOffersPaged(page: number, pageSize: number, filters?: GamesFilters): Promise<GamesPagedResult | null> {
         try {
-            const response = await this.post<GamesPagedResult>
-            (import.meta.env.VITE_BACK_SERVER_GET_PAGED_GAMES, {page: page, pageSize: pageSize, filters: filters});
+            let response;
+
+            if (filters) {
+                response = await this.post<GamesPagedResult>
+                (import.meta.env.VITE_BACK_SERVER_GET_PAGED_WITH_FILTERS, {page: page, pageSize: pageSize, filters: filters});
+            } else {
+                response = await this.get<GamesPagedResult>
+                (`${import.meta.env.VITE_BACK_SERVER_GET_PAGED_GAMES}?page=${page}&pageSize=${pageSize}`);
+            }
+
 
             return response.data as GamesPagedResult;
         } catch (error) {
