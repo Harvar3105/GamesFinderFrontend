@@ -69,7 +69,7 @@ export default class AxiosController {
 
     public async updateTokens(jwt: string, rt: string): Promise<boolean> {
         try {
-            const response = await this.post<{jwt: string, rt: string}>(import.meta.env.AUTH_SERVER_UPDATE_TOKENS, {jwt, rt});
+            const response = await this.post<{jwt: string, rt: string}>(import.meta.env.VITE_AUTH_SERVER_UPDATE_TOKENS, {jwt, rt});
             if (response.status !== 200) return false;
             this.userStore!.setUserTokens(response.data.jwt, response.data.rt)
 

@@ -122,12 +122,14 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch} from 'vue';
-import {ECurrency, EVendor} from "@/domain/enums";
-import {IGame, PriceRange} from "@/domain/entities";
 import GamesFilters from "../../domain/params/gamesFilters.ts";
 import {ESort} from "@/domain/enums/ESort.ts";
 import {EPriceCompare} from "@/domain/enums/EPriceCompare.ts";
 import {backendInstance} from "@/axios/ControllersInit.ts";
+import {EVendor} from "@/domain/enums/EVendor.ts";
+import {ECurrency} from "@/domain/enums/ECurrency.ts";
+import {IGame} from "@/domain/entities/Game.ts";
+import {PriceRange} from "@/domain/entities/GameOffer.ts";
 
 const games = ref<IGame[]>([]);
 

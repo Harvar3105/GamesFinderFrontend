@@ -30,7 +30,6 @@ onBeforeUnmount(() => {
 <template>
   <div class="flex flex-col min-h-screen
     dark:bg-[#1a1a1e] dark:text-[#efeff0]">
-    <!-- ХЕДЕР -->
     <header
         ref="headerRef"
         :style="{ top: headerTop }"
@@ -38,12 +37,10 @@ onBeforeUnmount(() => {
       <Navigation />
     </header>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="flex-grow">
       <router-view />
     </main>
 
-    <!-- ФУТЕР -->
     <Footer />
   </div>
 </template>

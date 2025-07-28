@@ -35,7 +35,7 @@ import {computed, ref} from "vue";
 import TextDisplayField from "../widgets/fields/TextDisplayField.vue";
 import UniversalDialog from "../widgets/dialog/UniversalDialog.vue";
 import TextInputField from "../widgets/fields/TextInputField.vue";
-import {User} from "@/domain/entities";
+import {User} from "@/domain/entities/User.ts";
 
 const fieldsSharedOptions:string = "w-full";
 
@@ -72,7 +72,7 @@ const saveWishlist = async () => {
 
     const user = userStore.user;
     console.log(user);
-    user!.data!.wishlist = parsedWishlist;
+    user!.data!.usersWishlist = parsedWishlist;
     await userStore.setUserWithDataSave(user as User);
 
     wishlistDialogOpen.value = false;

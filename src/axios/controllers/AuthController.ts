@@ -1,6 +1,6 @@
 ﻿import ResponseError from "@/axios/ResponseError.ts";
-import {IUser, IUserPayload, User} from "@/domain/entities";
 import AxiosController, {AxiosControllerOptions} from "@/axios/AxiosController.ts";
+import {IUser, IUserPayload, User} from "@/domain/entities/User.ts";
 
 export default class AuthController extends AxiosController{
 
@@ -19,7 +19,7 @@ export default class AuthController extends AxiosController{
                 email: userdata.email,
             })
 
-            return response.data as User;
+            return new User(response.data as User);
         } catch (error: any) {
             return new ResponseError(500, error.stack);
         }
@@ -35,7 +35,7 @@ export default class AuthController extends AxiosController{
                 password: user.password
             })
 
-            return response.data as User;
+            return new User(response.data as User);
         } catch (error: any) {
             return new ResponseError(500, error.stack);
         }
@@ -46,7 +46,7 @@ export default class AuthController extends AxiosController{
             const response = await this.post<IUserPayload>(import.meta.env.VITE_AUTH_SERVER_LOGIN_URL, {
                 jwt, rt
             })
-            return response.data as User;
+            return new User(response.data as User);
         } catch (error: any) {
             return new ResponseError(500, error.stack);
         }

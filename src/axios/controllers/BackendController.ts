@@ -1,6 +1,6 @@
-﻿import { Game, IGame } from "@/domain/entities";
-import GamesFilters from "@/domain/params/gamesFilters.ts";
+﻿import GamesFilters from "@/domain/params/gamesFilters.ts";
 import AxiosController, {AxiosControllerOptions} from "@/axios/AxiosController.ts";
+import {Game, IGame} from "@/domain/entities/Game.ts";
 
 export default class BackendController extends AxiosController{
 
@@ -12,7 +12,7 @@ export default class BackendController extends AxiosController{
         try {
             const response = await this.get<IGame[]>(import.meta.env.VITE_BACK_SERVER_GET_ALL_GAMES);
 
-            return response.data as Game[];
+            return response.data.map(payload => new Game(payload));
         } catch (error) {
             return null;
         }

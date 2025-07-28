@@ -29,7 +29,7 @@ import { ref } from 'vue'
 import router, {routeNames} from "../../router.ts";
 import {useUserStore} from "@/store/user-store.ts";
 import {authInstance} from "@/axios/ControllersInit.ts";
-import {User} from "@/domain/entities";
+import {User} from "@/domain/entities/User.ts";
 
 const email = ref('');
 const password = ref('');

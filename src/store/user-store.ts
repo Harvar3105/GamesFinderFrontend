@@ -1,6 +1,6 @@
 ﻿import { defineStore } from 'pinia'
-import {IUser, User, UserData} from "@/domain/entities";
 import {authInstance, userDataInstance} from "@/axios/ControllersInit.ts";
+import {IUser, User, UserData} from "@/domain/entities/User.ts";
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -59,13 +59,7 @@ export const useUserStore = defineStore('user', {
                 return;
             }
 
-            this.user.data.id = data.id;
-            this.user.data.updatedAt = data.updatedAt;
-            this.user.data.createdAt = data.createdAt;
-            this.user.data.avatarContent = data.avatarContent;
-            this.user.data.avatarType = data.avatarType;
-            this.user.data.avatarName = data.avatarName;
-            this.user.data.wishlist = data.wishlist;
+            this.user.data = data;
             return;
         },
 

@@ -1,5 +1,5 @@
-﻿import {readFileAsBase64} from "../helpers";
-import {Entity, IEntity} from "./Entity.ts";
+﻿import {Entity, IEntity} from "./Entity.ts";
+import {readFileAsBase64} from "@/domain/helpers/ReadFileAsBase64.ts";
 
 export interface IUser extends IEntity {
     username: string,
@@ -14,18 +14,15 @@ export interface IUser extends IEntity {
 }
 
 export interface IUserData extends IEntity{
-    id: string | null
     userId: string
-    wishlist: number[]
+    usersWishlist: number[]
     avatarName?: string | null
     avatarContent?: string | null
     avatarType?: string | null
 }
 
 export interface IUserPayload extends Partial<Omit<IUser, 'data'>> {}
-export interface IUserDataPayload extends Partial<Omit<IUserData, 'wishlist'>> {
-    usersWishlist: number[] | null;
-}
+export interface IUserDataPayload extends Partial<IUserData> {}
 
 export class User extends Entity implements IUser{
     public username: string;
@@ -61,7 +58,7 @@ export class User extends Entity implements IUser{
 
 export class UserData extends Entity implements IUserData{
     public userId: string;
-    public wishlist: number[];
+    public usersWishlist: number[];
     public avatarName?: string | null
     public avatarContent?: string | null
     public avatarType?: string | null
@@ -69,8 +66,7 @@ export class UserData extends Entity implements IUserData{
     constructor(data: IUserData) {
         super(data);
         this.userId = data.userId;
-        this.id = data.id;
-        this.wishlist = data.wishlist;
+        this.usersWishlist = data.usersWishlist;
         this.avatarName = data.avatarName;
         this.avatarContent = data.avatarContent;
         this.avatarType = data.avatarType;
