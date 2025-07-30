@@ -8,15 +8,17 @@ export const routeNames = {
     register: "Register",
     profile: "Profile",
     gamesList: "GamesList",
+    adminPanel: "AdminPanel",
 }
 
 const routes = [
-    { path: '/', name: routeNames.home, component: import("./views/main/HomeView.vue") },
-    { path: '/about', name: routeNames.about, component: import("./views/main/AboutView.vue") },
-    { path: '/register', name: routeNames.register, component: import("./views/user/RegistrationView.vue")},
-    { path: '/login', name: routeNames.login, component: import("./views/user/LoginView.vue")},
-    { path: '/profile', name: routeNames.profile, component: import("./views/user/UserProfileView.vue")},
-    { path: '/games-list', name: routeNames.gamesList, component: import("./views/main/GamesListView.vue")},
+    { path: '/', name: routeNames.home, component: () => import("./views/main/HomeView.vue") },
+    { path: '/about', name: routeNames.about, component: () => import("./views/main/AboutView.vue") },
+    { path: '/register', name: routeNames.register, component: () => import("./views/user/RegistrationView.vue")},
+    { path: '/login', name: routeNames.login, component: () => import("./views/user/LoginView.vue")},
+    { path: '/profile', name: routeNames.profile, component: () => import("./views/user/UserProfileView.vue")},
+    { path: '/games-list', name: routeNames.gamesList, component: () => import("./views/main/GamesListView.vue")},
+    { path: '/admin-panel', name: routeNames.adminPanel, component: () => import("./views/main/Admin/AdminPanel.vue")}
 ];
 
 const router = createRouter({

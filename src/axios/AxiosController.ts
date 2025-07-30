@@ -49,9 +49,9 @@ export default class AxiosController {
         if (config.headers) {
             config.headers["Authorization"] = `Bearer ${this.userStore!.user?.jwt}`;
         } else {
-            config = {headers: {
+            config.headers = {
                     'Authorization': `Bearer ${this.userStore!.user?.jwt}`
-                }};
+                };
         }
         return config;
     }
@@ -69,7 +69,7 @@ export default class AxiosController {
 
     public async updateTokens(jwt: string, rt: string): Promise<boolean> {
         try {
-            const response = await this.post<{jwt: string, rt: string}>(import.meta.env.VITE_AUTH_SERVER_UPDATE_TOKENS, {jwt, rt});
+            const response = await this.post<{jwt: string, rt: string}>(import.meta.env.VITE_AUTH_SERVER_UPDATE_TOKENS, {jwt: jwt, refreshToken: rt}, {baseURL: import.meta.env.VITE_AUTH_SERVER_URL});
             if (response.status !== 200) return false;
             this.userStore!.setUserTokens(response.data.jwt, response.data.rt)
 

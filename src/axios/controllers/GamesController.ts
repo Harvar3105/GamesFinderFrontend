@@ -2,7 +2,7 @@
 import AxiosController, {AxiosControllerOptions} from "@/axios/AxiosController.ts";
 import {Game, IGame} from "@/domain/entities/Game.ts";
 
-export default class BackendController extends AxiosController{
+export default class GamesController extends AxiosController{
 
     constructor(config: AxiosControllerOptions) {
         super(config);
@@ -34,16 +34,6 @@ export default class BackendController extends AxiosController{
             return response.data as GamesPagedResult;
         } catch (error) {
             return null;
-        }
-    }
-
-    public async crawlSteam(gamesIds: number[], forceUpdate: boolean): Promise<string> {
-        try {
-            const response = await this.post(import.meta.env.VITE_BACK_SERVER_STEAM_CRAWLER, {gamesIds, forceUpdate});
-
-            return response.data as string;
-        } catch (error) {
-            return "ERROR OCCURED!"
         }
     }
 }

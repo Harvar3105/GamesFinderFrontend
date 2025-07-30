@@ -22,6 +22,34 @@ export default defineConfig(({mode}) => {
     },
     server: {
       port: parseInt(env.VITE_PORT),
+      cors: true,
+      // proxy: {
+      //   '/api/Auth': {
+      //     target: 'http://localhost:8080',
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api\/Auth/, '')
+      //   },
+      //   '/api/Token': {
+      //     target: 'http://localhost:8080',
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api\/Token/, '')
+      //   },
+      //   '/api/UserData': {
+      //     target: 'http://localhost:8000',
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api\/UserData/, '')
+      //   },
+      //   '/api/SteamCrawler': {
+      //     target: 'http://localhost:8000',
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api\/SteamCrawler/, '')
+      //   },
+      //   '/api/Games': {
+      //     target: 'http://localhost:8000',
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api\/Games/, '')
+      //   },
+      // }
   }
   }
 })

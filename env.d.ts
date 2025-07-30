@@ -9,7 +9,10 @@
 
     readonly VITE_BACK_SERVER_URL: string;
     readonly VITE_BACK_SERVER_USER_DATA_URL: string;
+
     readonly VITE_BACK_SERVER_STEAM_CRAWLER: string;
+    readonly VITE_BACK_SERVER_STEAM_JSON_METADATA: string;
+    readonly VITE_BACK_SERVER_STEAM_JSON_UPDATE: string;
 
     readonly VITE_BACK_SERVER_GET_ALL_GAMES: string;
     readonly VITE_BACK_SERVER_GET_PAGED_GAMES: string;
