@@ -8,10 +8,11 @@ import {watch} from "vue";
 
 const userStore = useUserStore();
 
-let isAdmin = userStore.user?.roles.includes("admin") || userStore.user?.roles.includes("Admin");
+let isAdmin = userStore.user?.roles.includes("Admin");
 
 watch(userStore, () => {
-  isAdmin = userStore.user?.roles.includes("admin") || userStore.user?.roles.includes("Admin");
+  console.log(userStore.user?.roles);
+  isAdmin = userStore.user?.roles.includes("Admin");
 })
 
 </script>
