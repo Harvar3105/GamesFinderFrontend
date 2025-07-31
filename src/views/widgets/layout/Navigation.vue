@@ -4,10 +4,16 @@ import ThemeSwitcher from "../theme/ThemeSwitcher.vue";
 import ProfileAvatar from "./ProfileAvatar.vue";
 import {useUserStore} from "@/store/user-store.ts";
 import {routeNames} from "@/router.ts";
+import {watch} from "vue";
 
 const userStore = useUserStore();
 
-const isAdmin = userStore.user?.roles.includes("admin") || userStore.user?.roles.includes("Admin");
+let isAdmin = userStore.user?.roles.includes("admin") || userStore.user?.roles.includes("Admin");
+
+watch(userStore, () => {
+  isAdmin = userStore.user?.roles.includes("admin") || userStore.user?.roles.includes("Admin");
+})
+
 </script>
 
 <template>
